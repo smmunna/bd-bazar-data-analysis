@@ -28,16 +28,15 @@ function ReportTable({ data }) {
       <table className="min-w-full border border-gray-300 bg-white text-xs sm:text-sm md:text-base">
         <thead className="bg-gray-200 sticky top-0 z-10">
           <tr>
-            <th className="border p-2 whitespace-nowrap">Product</th>
-            <th className="border p-2 whitespace-nowrap">Unit</th>
-            <th className="border p-2 whitespace-nowrap">Today Min</th>
-            <th className="border p-2 whitespace-nowrap">Today Max</th>
-            <th className="border p-2 whitespace-nowrap">Last Week</th>
-            <th className="border p-2 whitespace-nowrap">Last Month</th>
-            <th className="border p-2 whitespace-nowrap">
-              মাসিক মূল্যের হ্রাস/বৃদ্ধি
-            </th>
+            <th className="border p-2 whitespace-nowrap">পণ্য</th>
+            <th className="border p-2 whitespace-nowrap">একক</th>
+            <th className="border p-2 whitespace-nowrap">আজকের ন্যূনতম মূল্য (৳)</th>
+            <th className="border p-2 whitespace-nowrap">আজকের সর্বাধিক মূল্য (৳)</th>
+            <th className="border p-2 whitespace-nowrap">গত সপ্তাহ</th>
+            <th className="border p-2 whitespace-nowrap">গত মাস</th>
+            <th className="border p-2 whitespace-nowrap">মাসিক মূল্যের হ্রাস/বৃদ্ধি</th>
           </tr>
+
         </thead>
         <tbody>
           {data.reduce((acc, item, i, arr) => {
@@ -86,15 +85,14 @@ function ReportTable({ data }) {
                       {formatPercentIfNeeded(item.lastmonth_max, item.category)}
                     </td>
                     <td
-                      className={`border p-2 whitespace-nowrap ${
-                        typeof item.year_min === "number"
+                      className={`border p-2 whitespace-nowrap ${typeof item.year_min === "number"
                           ? item.year_min < 0
                             ? "bg-green-200"
                             : item.year_min > 0
-                            ? "bg-red-200"
-                            : ""
+                              ? "bg-red-200"
+                              : ""
                           : ""
-                      }`}
+                        }`}
                     >
                       {typeof item.year_min === "number" ? (
                         <>
