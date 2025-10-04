@@ -1,6 +1,7 @@
 function ReportTable({ data }) {
   if (!data.length) return null;
 
+  // ✅ Format % only for target category
   const formatPercentIfNeeded = (value, category) => {
     if (category?.trim() === "যে সকল পণ্যের মূল্য হ্রাস/বৃদ্ধি হয়েছেঃ") {
       const num = parseFloat(value);
@@ -11,6 +12,7 @@ function ReportTable({ data }) {
     return value;
   };
 
+  // ✅ Skip unwanted footer/header rows (like under "গুড়া দুধ(প্যাকেটজাত)")
   const isSummaryRow = (item) => {
     const first = (item.product || "").trim();
     return (
@@ -22,17 +24,19 @@ function ReportTable({ data }) {
   };
 
   return (
-    <div className="overflow-y-auto max-h-[80vh]"> {/* ✅ Scrollable container */}
-      <table className="min-w-full border border-gray-300 bg-white shadow-md rounded-lg">
-        <thead className="bg-gray-200 sticky top-0 z-10"> {/* ✅ Fixed header */}
+    <div className="overflow-x-auto overflow-y-auto max-h-[80vh] rounded-lg shadow-md">
+      <table className="min-w-full border border-gray-300 bg-white text-xs sm:text-sm md:text-base">
+        <thead className="bg-gray-200 sticky top-0 z-10">
           <tr>
-            <th className="border p-2">Product</th>
-            <th className="border p-2">Unit</th>
-            <th className="border p-2">Today Min</th>
-            <th className="border p-2">Today Max</th>
-            <th className="border p-2">Last Week</th>
-            <th className="border p-2">Last Month</th>
-            <th className="border p-2">মাসিক মূল্যের হ্রাস/বৃদ্ধি</th>
+            <th className="border p-2 whitespace-nowrap">Product</th>
+            <th className="border p-2 whitespace-nowrap">Unit</th>
+            <th className="border p-2 whitespace-nowrap">Today Min</th>
+            <th className="border p-2 whitespace-nowrap">Today Max</th>
+            <th className="border p-2 whitespace-nowrap">Last Week</th>
+            <th className="border p-2 whitespace-nowrap">Last Month</th>
+            <th className="border p-2 whitespace-nowrap">
+              মাসিক মূল্যের হ্রাস/বৃদ্ধি
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -47,7 +51,7 @@ function ReportTable({ data }) {
                 <tr key={`cat-${i}`} className="bg-blue-100">
                   <td
                     colSpan="7"
-                    className="text-left font-semibold p-2 text-blue-900"
+                    className="text-left font-semibold p-2 text-blue-900 text-sm sm:text-base"
                   >
                     {item.category}
                   </td>
@@ -56,22 +60,33 @@ function ReportTable({ data }) {
             }
 
             acc.push(
-              <tr key={i} className="text-center hover:bg-gray-50">
+              <tr
+                key={i}
+                className="text-center hover:bg-gray-50 transition-colors duration-200"
+              >
                 {item.product && (
                   <>
-                    <td className="border p-2">{item.product}</td>
-                    <td className="border p-2">{item.unit}</td>
-                    <td className="border p-2">{item.today_min}</td>
-                    <td className="border p-2">{item.today_max}</td>
-                    <td className="border p-2">
+                    <td className="border p-2 whitespace-nowrap">
+                      {item.product}
+                    </td>
+                    <td className="border p-2 whitespace-nowrap">
+                      {item.unit}
+                    </td>
+                    <td className="border p-2 whitespace-nowrap">
+                      {item.today_min}
+                    </td>
+                    <td className="border p-2 whitespace-nowrap">
+                      {item.today_max}
+                    </td>
+                    <td className="border p-2 whitespace-nowrap">
                       {item.lastweek_min} - {item.lastweek_max}
                     </td>
-                    <td className="border p-2">
+                    <td className="border p-2 whitespace-nowrap">
                       {formatPercentIfNeeded(item.lastmonth_min, item.category)} -{" "}
                       {formatPercentIfNeeded(item.lastmonth_max, item.category)}
                     </td>
                     <td
-                      className={`border p-2 ${
+                      className={`border p-2 whitespace-nowrap ${
                         typeof item.year_min === "number"
                           ? item.year_min < 0
                             ? "bg-green-200"
