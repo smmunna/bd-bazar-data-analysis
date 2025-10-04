@@ -42,10 +42,10 @@ npm install
 ### 3. Run the app
 
 ```bash
-npm start
+npm run dev
 ```
 
-The app will run at [http://localhost:3000](http://localhost:3000).
+The app will run at [http://localhost:5173](http://localhost:5173).
 
 ---
 
@@ -55,7 +55,7 @@ The app will run at [http://localhost:3000](http://localhost:3000).
 
    [Today's Retail Market Price - Dhaka](https://tcb.gov.bd/site/view/daily_rmp/Today's-retail-market-price-in-Dhaka-city)
 
-2. Go to the **“রিপোর্ট দেখুন”** page.
+2. Go to the **“Upload”** page.
 
 3. Upload the Excel file.
 
