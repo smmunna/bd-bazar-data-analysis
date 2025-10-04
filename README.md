@@ -1,6 +1,3 @@
-Here’s a clean **README.md** you can copy and paste directly for your project:
-
-````markdown
 # আজকের খুচরা বাজারদর - ঢাকা মহানগর
 
 A React-based web application that allows users to view and analyze the daily retail market prices of various products in Dhaka, Bangladesh, using official data from **Trading Corporation of Bangladesh (TCB)**.
@@ -110,4 +107,3 @@ retail-market-dhaka/
 ## 📄 License
 
 This project is for educational and informational purposes. Data is sourced directly from **TCB**, and this project does not store or modify any official data.
-```
